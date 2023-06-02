@@ -1,13 +1,11 @@
 import Homepage from "./views/Homepage.js";
 
-const appPath = path => "/app" + path
-
 const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
 const getPathKeys = path => Array.from(path.matchAll(/:(\w+)/g)).map(result => result[1])
 
 const routes = [
-    { path: appPath("/"), view: Homepage },
+    { path: "/", view: Homepage },
 ].map(route => {
     route.pathRegex = getPathRegex(route.path)
     route.pathKeys = getPathKeys(route.path)

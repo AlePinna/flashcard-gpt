@@ -3,7 +3,7 @@ const jwtService = require("../services/JWTService")
 module.exports = async (req, res, next) => {
     try {
       const authorization = req.headers.authorization
-      if (!authorization || !authorization.startsWith("Bearer ")) {
+      if (!authorization?.startsWith("Bearer ")) {
           throw new Error("Missing bearer token")
       }
       const token = authorization.split(' ')[1]
