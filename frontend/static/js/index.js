@@ -1,12 +1,14 @@
 import Homepage from "./views/Homepage.js";
 
+const routesToInitialize = [
+    { path: "/", view: Homepage }
+]
+
 const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
 const getPathKeys = path => Array.from(path.matchAll(/:(\w+)/g)).map(result => result[1])
 
-const routes = [
-    { path: "/", view: Homepage },
-].map(route => {
+const routes = routesToInitialize.map(route => {
     route.pathRegex = getPathRegex(route.path)
     route.pathKeys = getPathKeys(route.path)
     return route
