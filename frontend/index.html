@@ -10,9 +10,15 @@
     <nav class="nav">
         <h2>FlashcardGPT</h2>
         <a href="/" class="nav__link" data-link id="home">Home</a>
-        <a href="/login" class="nav__link" data-link id="login">Login</a>
-        <a href="/register" class="nav__link" data-link id="register">Register</a>
-        <a href="/answers" class="nav__link" data-link id="answers">Answers</a>
+        <div id="not-logged-in-links">
+            <a href="/login" class="nav__link" data-link id="login">Login</a>
+            <a href="/register" class="nav__link" data-link id="register">Register</a>
+        </div>
+        <div id="already-logged-in-links">
+            <a href="/decks" class="nav__link" data-link id="decks">Decks</a>
+            <a href="/answers" class="nav__link" data-link id="answers">Answers</a>
+            <a href="/" class="nav__link" id="loggout">Log out</a>
+        </div>
     </nav>
     <div id="app"></div>
     <script type="module" src="/static/js/index.js"></script>

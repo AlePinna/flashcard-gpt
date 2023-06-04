@@ -2,18 +2,15 @@ import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
     constructor(params) {
-        super(params);
-        this.setTitle("Home");
+        super(params)
+        this.setTitle("Home")
     }
 
     async updateView() {
         const html = `
-            <h1>Lorem ipsum</h1>
+            <h1>Welcome to FlashcardGPT</h1>
             <p>
-                Fugiat voluptate et nisi Lorem cillum anim sit do eiusmod occaecat irure do. Reprehenderit anim fugiat sint exercitation consequat. Sit anim laborum sit amet Lorem adipisicing ullamco duis. Anim in do magna ea pariatur et.
-            </p>
-            <p>
-                <a href="/posts" data-link>View recent posts</a>.
+                This web app will help train your mnemonic skills with user-generated flashcard, with the help of ChatGPT.
             </p>
         `
         this.setHtml(html)

@@ -1,13 +1,15 @@
-import Homepage from "./views/Homepage.js"
-import Login from "./views/Login.js"
-import Register from "./views/Register.js"
-import Answers from "./views/Answers.js"
+import Homepage from "./views/Homepage.js";
+import Login from "./views/Login.js";
+import Register from "./views/Register.js";
+import Answers from "./views/Answers.js";
+import Decks from "./views/Decks.js";
 
 const routesToInitialize = [
     { path: "/", view: Homepage },
     { path: "/login", view: Login },
     { path: "/register", view: Register },
-    { path: "/answers", view: Answers }
+    { path: "/answers", view: Answers },
+    { path: "/decks", view: Decks }
 ]
 
 const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
@@ -50,14 +52,22 @@ const getRoute = () => {
     return null
 }
 
-const router = async () => {
+const checkSession = async () => {
+    if ("token" in sessionStorage) {
+        document.querySelector("#not-logged-in-links").style.display = "none"
+        document.querySelector("#already-logged-in-links").style.display = "block"
+    }
+}
+
+const router = async() => {
+    checkSession()
     
     const matchingRoute = getRoute() ||  {
         route: routes[0],
         params: []
     }
 
-    await (new matchingRoute.route.view(matchingRoute.params).updateView())
+    new matchingRoute.route.view(matchingRoute.params).updateView()
 }
 
 const goToRoute = url => {
@@ -70,10 +80,16 @@ window.addEventListener("popstate", router)
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
         if (e.target.matches("[data-link]")) {
-            e.preventDefault();
-            goToRoute(e.target.href);
+            e.preventDefault()
+            goToRoute(e.target.href)
         }
     })
 
     router()
+})
+
+document.querySelector("#loggout").addEventListener("click", () => {
+    sessionStorage.removeItem("token")
+    document.querySelector("#not-logged-in-links").style.display = "block"
+    document.querySelector("#already-logged-in-links").style.display = "none"
 })

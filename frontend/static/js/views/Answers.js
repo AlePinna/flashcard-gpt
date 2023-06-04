@@ -2,8 +2,8 @@ import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
     constructor(params) {
-        super(params);
-        this.setTitle("Answers");
+        super(params)
+        this.setTitle("Answers")
     }
 
     async updateView() {
@@ -45,6 +45,9 @@ export default class extends AbstractView {
             if (request.status == 200) {
                 const answer = JSON.parse(request.response)?.data
                 document.querySelector("#answer").innerHTML = answer
+            } else if (request.status == 401) {
+                document.querySelector("#loggout").click()
+                alert("Session expired, please log in again")
             } else {
                 alert(request.response?.error)
             }

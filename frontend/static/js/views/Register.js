@@ -2,18 +2,18 @@ import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
     constructor(params) {
-        super(params);
-        this.setTitle("Register");
+        super(params)
+        this.setTitle("Register")
     }
 
     async updateView() {
         const html = `
-        <h2>Create a new account</h2><br>
-        Username <input id="username" type="text"/><br>
-        Password <input id="password" type="password"/><br>
-        Confirm password <input id="password-confirmation" type="password"/><br>
-        <button id="submit-register">Login</button>
-    `
+            <h2>Create a new account</h2><br>
+            Username <input id="username" type="text"/><br>
+            Password <input id="password" type="password"/><br>
+            Confirm password <input id="password-confirmation" type="password"/><br>
+            <button id="submit-register">Login</button>
+        `
 
         this.setHtml(html)
 
