@@ -1,7 +1,13 @@
-import Homepage from "./views/Homepage.js";
+import Homepage from "./views/Homepage.js"
+import Login from "./views/Login.js"
+import Register from "./views/Register.js"
+import Answers from "./views/Answers.js"
 
 const routesToInitialize = [
-    { path: "/", view: Homepage }
+    { path: "/", view: Homepage },
+    { path: "/login", view: Login },
+    { path: "/register", view: Register },
+    { path: "/answers", view: Answers }
 ]
 
 const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
@@ -51,9 +57,7 @@ const router = async () => {
         params: []
     }
 
-    const view = new matchingRoute.route.view(matchingRoute.params)
-
-    document.querySelector("#app").innerHTML = await view.getHtml()
+    await (new matchingRoute.route.view(matchingRoute.params).updateView())
 }
 
 const goToRoute = url => {

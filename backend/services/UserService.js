@@ -4,13 +4,13 @@ const UserModel = require("../models/User")
 exports.createUser = async (username, password) => {
     
   if (!username || !password || username.trim().length < 8 || password.trim().length < 8) {
-    let err = new Error("Username and password should contain at least 8 characters")
+    const err = new Error("Username and password should contain at least 8 characters")
     err.status = 400
     throw err
   }
 
   if (await UserModel.exists({ username: username.trim() })) {
-    let err = new Error("This username is already taken")
+    const err = new Error("This username is already taken")
     err.status = 400
     throw err
   }
@@ -23,7 +23,7 @@ exports.createUser = async (username, password) => {
 exports.authenticateUser = async (username, password) => {
     
   if (!username || !password) {
-    let err = new Error("Username and password cannot be empty")
+    const err = new Error("Username and password cannot be empty")
     err.status = 400
     throw err
   }

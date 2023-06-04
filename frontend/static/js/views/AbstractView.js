@@ -7,7 +7,9 @@ export default class {
         document.title = title;
     }
 
-    async getHtml() {
-        return "";
+    setHtml(html) {
+        document.querySelector("#app").innerHTML = html
     }
+
+    async updateView() {}
 }

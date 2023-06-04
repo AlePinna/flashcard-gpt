@@ -11,7 +11,7 @@ router.route("/login").post(userController.authenticateUser)
 
 router.route("/register").post(userController.createUser)
 
-router.route("/answers").get(authInterceptor, chatGPTController.getAnswerForPrompt)
+router.route("/answers").post(authInterceptor, chatGPTController.getAnswerForPrompt)
 
 router.route("/decks")
   .get(authInterceptor, deckController.getAllDecks)

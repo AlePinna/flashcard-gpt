@@ -9,13 +9,13 @@ const openai = new openaiModule.OpenAIApi(configuration)
 exports.getAnswerForPrompt = async (prompt) => {
     
   if (!configuration.apiKey) {
-    let err = new Error("OpenAI API key not configured, please follow instructions in README.md")
+    const err = new Error("OpenAI API key not configured, please follow instructions in README.md")
     err.status = 400
     throw err
   }
 
   if (!prompt || prompt.trim().length === 0) {
-    let err = new Error("Please enter a valid prompt")
+    const err = new Error("Please enter a valid prompt")
     err.status = 400
     throw err
   }
@@ -24,7 +24,7 @@ exports.getAnswerForPrompt = async (prompt) => {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [generatePrompt(prompt)],
-      temperature: 0.2,
+      temperature: 1.0,
     })
     console.log(completion.data)
     return completion.data.choices[0].message.content
@@ -35,6 +35,6 @@ exports.getAnswerForPrompt = async (prompt) => {
 }
 
 function generatePrompt(prompt) {
-  let content = `Given the input '${prompt}' representing the prompt/question of a flashacard, provide a description/answer in the same language`
+  const content = `Given the input '${prompt}' representing the prompt/question of a flashacard, provide a description/answer in the same language`
   return {role: "user", content: content}
 }
