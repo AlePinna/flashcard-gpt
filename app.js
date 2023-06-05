@@ -32,4 +32,6 @@ app.get("*", (req, res) => {
 app.listen(3001, () => {
   console.log("Server is running on port 3001")
 })
- 
+
+process.on("uncaughException", error => console.log(error))
+process.on('unhandledRejection', error => console.log(error))

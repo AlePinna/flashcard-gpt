@@ -3,13 +3,15 @@ import Login from "./views/Login.js";
 import Register from "./views/Register.js";
 import Answers from "./views/Answers.js";
 import Decks from "./views/Decks.js";
+import DeckDetails from "./views/DeckDetails.js";
 
 const routesToInitialize = [
     { path: "/", view: Homepage },
     { path: "/login", view: Login },
     { path: "/register", view: Register },
     { path: "/answers", view: Answers },
-    { path: "/decks", view: Decks }
+    { path: "/decks", view: Decks },
+    { path: "/decks/:id", view: DeckDetails }
 ]
 
 const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
@@ -46,7 +48,7 @@ const getRoute = () => {
     if (matchingRoute) {
         return {
             route: matchingRoute.route,
-            params: getParams(matchingRoute.route.keys, matchingRoute.match)
+            params: getParams(matchingRoute.route.pathKeys, matchingRoute.match)
         }
     }
     return null
@@ -81,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
         if (e.target.matches("[data-link]")) {
             e.preventDefault()
-            goToRoute(e.target.href)
+            goToRoute(e.target.getAttribute("href"))
         }
     })
 

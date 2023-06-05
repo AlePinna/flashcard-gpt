@@ -11,27 +11,15 @@ export default class extends AbstractView {
             <h2>Decks</h2><br>
             <table id="decks-table" class="styled-table">
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Cards</th>
+                    <th>Details</th>
                 </tr>
             </table>
         `
         this.setHtml(html)
 
-        const table = document.querySelector("#decks-table")
-
-        const decks = this.getDecks()
-        console.log(decks)
-        decks.forEach(deck => {
-            const row = table.insertRow(-1)
-            const idCell = row.insertCell(0)
-            idCell.innerHTML = deck._id
-            const nameCell = row.insertCell(1)
-            nameCell.innerHTML = deck.name
-            const cardsCell = row.insertCell(2)
-            cardsCell.innerHTML = deck.flashcards?.length || 0
-        })
+        this.getDecks()
     }
 
     getDecks() {
@@ -49,14 +37,20 @@ export default class extends AbstractView {
         request.send()
         
         if (request.status == 200) { 
-            return JSON.parse(request.response)?.data || []
+            const decks = JSON.parse(request.response)?.data || []
+            const table = document.querySelector("#decks-table")
+            decks?.forEach(deck => {
+                const row = table.insertRow(-1)
+                const nameCell = row.insertCell(0)
+                nameCell.innerHTML = deck.name
+                const cardsCell = row.insertCell(1)
+                cardsCell.innerHTML = deck.flashcards?.length || 0
+                const viewCell = row.insertCell(2)
+                viewCell.innerHTML =  `<button href="/decks/${deck._id}" data-link>View</button>`                
+            })
         } else if (request.status == 401) {
             document.querySelector("#loggout").click()
             alert("Session expired, please log in again")
-            return []
-        } else {
-            return []
-        }
-        
+        }   
     }
 }
