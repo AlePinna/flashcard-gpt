@@ -4,6 +4,7 @@ import Register from "./views/Register.js";
 import Answers from "./views/Answers.js";
 import Decks from "./views/Decks.js";
 import DeckDetails from "./views/DeckDetails.js";
+import FlashcardDetails from "./views/FlashcardDetails.js";
 
 const routesToInitialize = [
     { path: "/", view: Homepage },
@@ -11,10 +12,11 @@ const routesToInitialize = [
     { path: "/register", view: Register },
     { path: "/answers", view: Answers },
     { path: "/decks", view: Decks },
-    { path: "/decks/:id", view: DeckDetails }
+    { path: "/decks/:id", view: DeckDetails },
+    { path: "/decks/:deckId/flashcards/:id", view: FlashcardDetails }
 ]
 
-const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
+const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "([0-9a-zA-Z]+)") + "$")
 
 const getPathKeys = path => Array.from(path.matchAll(/:(\w+)/g)).map(result => result[1])
 
@@ -25,7 +27,7 @@ const routes = routesToInitialize.map(route => {
 })
 
 const getParams = (keys, match) => {
-    if (!keys) {
+    if (!keys || keys.length == 0 || !match || match.length == 0) {
         return {}
     }
 
@@ -43,7 +45,7 @@ const getRoute = () => {
             route: route,
             match: location.pathname.match(route.pathRegex)
         }
-    }).find(wrappedRoute => wrappedRoute.match !== null)
+    }).find(wrappedRoute => wrappedRoute.match)
 
     if (matchingRoute) {
         return {

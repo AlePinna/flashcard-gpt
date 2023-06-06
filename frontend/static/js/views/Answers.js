@@ -43,8 +43,11 @@ export default class extends AbstractView {
         request.setRequestHeader("Authorization", "Bearer " + token)
         request.onreadystatechange = (event) => {
             if (request.status == 200) {
-                const answer = JSON.parse(request.response)?.data
-                document.querySelector("#answer").innerHTML = answer
+                const answerValue = JSON.parse(request.response)?.data
+                const answer = document.querySelector("#answer")
+                if (answerValue && answer) {
+                    answer.value = answerValue
+                }
             } else if (request.status == 401) {
                 document.querySelector("#loggout").click()
                 alert("Session expired, please log in again")
