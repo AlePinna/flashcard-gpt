@@ -38,13 +38,13 @@ export default class extends AbstractView {
         if (prompt) {
             newFlashcard.prompt = prompt
         } else {
-            alert("The prompt cannot be empty")
+            alert("The prompt cannot be blank")
             return
         }
         if (answer) {
             newFlashcard.answer = answer
         } else {
-            alert("The answer cannot be empty")
+            alert("The answer cannot be blank")
             return
         }
 

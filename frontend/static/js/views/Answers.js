@@ -32,7 +32,7 @@ export default class extends AbstractView {
         const prompt = document.querySelector("#prompt")?.value?.trim()
 
         if (!prompt) {
-            alert("The prompt cannot be empty")
+            alert("The prompt cannot be blank")
             return
         }
         

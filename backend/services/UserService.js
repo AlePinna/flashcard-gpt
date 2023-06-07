@@ -23,7 +23,7 @@ exports.createUser = async (username, password) => {
 exports.authenticateUser = async (username, password) => {
     
   if (!username || !password) {
-    const err = new Error("Username and password cannot be empty")
+    const err = new Error("Username and password cannot be blank")
     err.status = 400
     throw err
   }

@@ -25,7 +25,7 @@ export default class extends AbstractView {
         const password = document.querySelector("#password")?.value?.trim()
         const confirmedPassword = document.querySelector("#password-confirmation")?.value?.trim()
         if (!username || !password) {
-            alert("Username and password cannot be empty")
+            alert("Username and password cannot be blank")
             return
         }
         if (password !== confirmedPassword) {

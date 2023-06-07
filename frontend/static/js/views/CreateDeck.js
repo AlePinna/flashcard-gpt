@@ -22,6 +22,7 @@ export default class extends AbstractView {
     getDeck() {
         const deckName = document.querySelector("#deck-name")?.value?.trim()
         if (!deckName) {
+            alert("The deck name cannot be blank")
             return
         }
         const newDeck = { name: deckName }
