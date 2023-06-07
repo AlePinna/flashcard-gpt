@@ -52,7 +52,7 @@ export default class extends AbstractView {
                 answer.value = this.flashcard?.answer
             }
         } else if (request.status == 401) {
-            document.querySelector("#loggout").click()
+            document.querySelector("#logout").click()
             alert("Session expired, please log in again")
         }   
 
@@ -64,7 +64,7 @@ export default class extends AbstractView {
     }
 
     regenerateAnswer() {
-        const prompt = document.querySelector("#prompt")?.value
+        const prompt = document.querySelector("#prompt")?.value?.trim()
         if (!prompt) {
             return
         }
@@ -88,8 +88,8 @@ export default class extends AbstractView {
     }
 
     updateFlashcard() {
-        const prompt = document.querySelector("#prompt")?.value
-        const answer = document.querySelector("#answer")?.value
+        const prompt = document.querySelector("#prompt")?.value?.trim()
+        const answer = document.querySelector("#answer")?.value?.trim()
         if (!prompt || !answer || prompt == this.flashcard?.prompt || answer == this.flashcard?.answer) {
             return
         }        

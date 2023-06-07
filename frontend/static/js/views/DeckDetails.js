@@ -19,7 +19,8 @@ export default class extends AbstractView {
             </table>
             <button id="update-deck">Update</button>
             <button id="delete-deck">Delete</button>
-            <button href="/decks" data-link>Close</button>
+            <button href="/decks/${this.params.id}/new_flashcard" data-link>New flashcard</button>
+            <button id="redirect-to-decks" href="/decks" data-link>Close</button>
         `
         this.setHtml(html)
 
@@ -49,7 +50,7 @@ export default class extends AbstractView {
                 deckName.value = this.deck?.name
             }
         } else if (request.status == 401) {
-            document.querySelector("#loggout").click()
+            document.querySelector("#logout").click()
             alert("Session expired, please log in again")
         }   
 
@@ -74,7 +75,7 @@ export default class extends AbstractView {
     }
 
     updateDeck() {
-        const deckName = document.querySelector("#deck-name")?.value
+        const deckName = document.querySelector("#deck-name")?.value?.trim()
         if (!deckName || deckName == this.deck?.name) {
             return
         }

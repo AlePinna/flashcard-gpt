@@ -16,6 +16,7 @@ export default class extends AbstractView {
                     <th>Details</th>
                 </tr>
             </table>
+            <button href="/new_deck" data-link>New deck</button>
         `
         this.setHtml(html)
 
@@ -49,7 +50,7 @@ export default class extends AbstractView {
                 viewCell.innerHTML =  `<button href="/decks/${deck._id}" data-link>View</button>`                
             })
         } else if (request.status == 401) {
-            document.querySelector("#loggout").click()
+            document.querySelector("#logout").click()
             alert("Session expired, please log in again")
         }   
     }

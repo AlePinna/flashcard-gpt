@@ -29,7 +29,7 @@ export default class extends AbstractView {
             return
         }
 
-        const prompt = document.querySelector("#prompt")?.value
+        const prompt = document.querySelector("#prompt")?.value?.trim()
 
         if (!prompt) {
             alert("The prompt cannot be empty")
@@ -49,7 +49,7 @@ export default class extends AbstractView {
                     answer.value = answerValue
                 }
             } else if (request.status == 401) {
-                document.querySelector("#loggout").click()
+                document.querySelector("#logout").click()
                 alert("Session expired, please log in again")
             } else {
                 alert(request.response?.error)

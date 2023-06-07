@@ -3,7 +3,9 @@ import Login from "./views/Login.js";
 import Register from "./views/Register.js";
 import Answers from "./views/Answers.js";
 import Decks from "./views/Decks.js";
+import CreateDeck from "./views/CreateDeck.js";
 import DeckDetails from "./views/DeckDetails.js";
+import CreateFlashcard from "./views/CreateFlashcard.js";
 import FlashcardDetails from "./views/FlashcardDetails.js";
 
 const routesToInitialize = [
@@ -12,7 +14,9 @@ const routesToInitialize = [
     { path: "/register", view: Register },
     { path: "/answers", view: Answers },
     { path: "/decks", view: Decks },
+    { path: "/new_deck", view: CreateDeck },
     { path: "/decks/:id", view: DeckDetails },
+    { path: "/decks/:id/new_flashcard", view: CreateFlashcard },
     { path: "/decks/:deckId/flashcards/:id", view: FlashcardDetails }
 ]
 
@@ -92,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     router()
 })
 
-document.querySelector("#loggout").addEventListener("click", () => {
+document.querySelector("#logout").addEventListener("click", () => {
     sessionStorage.removeItem("token")
     document.querySelector("#not-logged-in-links").style.display = "block"
     document.querySelector("#already-logged-in-links").style.display = "none"

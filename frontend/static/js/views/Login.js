@@ -20,8 +20,8 @@ export default class extends AbstractView {
     }
 
     login() {
-        const username = document.querySelector("#username")?.value
-        const password = document.querySelector("#password")?.value
+        const username = document.querySelector("#username")?.value?.trim()
+        const password = document.querySelector("#password")?.value?.trim()
         if (!username || !password) {
             alert("Username and password cannot be empty")
             return
