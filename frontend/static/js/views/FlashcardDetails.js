@@ -120,7 +120,7 @@ export default class extends AbstractView {
         const token = sessionStorage.getItem("token")
         const deckId = view.params.id
         const flashcardId = view.params.id
-        const url = window.location.origin + "/api/decks/" + deckId + "/" + flashcardId
+        const url = window.location.origin + "/api/decks/" + deckId + "/flashcards/" + flashcardId
         const request = new XMLHttpRequest()
         request.open('DELETE', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
