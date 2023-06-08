@@ -7,6 +7,7 @@ import CreateDeck from "./views/CreateDeck.js";
 import DeckDetails from "./views/DeckDetails.js";
 import CreateFlashcard from "./views/CreateFlashcard.js";
 import FlashcardDetails from "./views/FlashcardDetails.js";
+import Review from "./views/Review.js";
 
 const routesToInitialize = [
     { path: "/", view: Homepage },
@@ -17,6 +18,7 @@ const routesToInitialize = [
     { path: "/new_deck", view: CreateDeck },
     { path: "/decks/:id", view: DeckDetails },
     { path: "/decks/:id/new_flashcard", view: CreateFlashcard },
+    { path: "/decks/:id/review", view: Review },
     { path: "/decks/:deckId/flashcards/:id", view: FlashcardDetails }
 ]
 

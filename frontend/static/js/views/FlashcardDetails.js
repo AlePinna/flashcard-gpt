@@ -58,8 +58,11 @@ export default class extends AbstractView {
 
         if (this.flashcard) {
             document.querySelector("#regenerate-answer")?.addEventListener("click", this.regenerateAnswer)
-            document.querySelector("#update-flashcard")?.addEventListener("click", this.updateFlashcard)
-            document.querySelector("#delete-flashcard")?.addEventListener("click", this.deleteFlashcard)    
+            document.querySelector("#update-flashcard")?.addEventListener("click", () => this.updateFlashcard(this))
+            document.querySelector("#delete-flashcard")?.addEventListener("click", () => this.deleteFlashcard(this))    
+        } else {
+            alert("Deck not found found")
+            document.querySelector("#redirect-to-deck")?.click()
         }
     }
 
@@ -87,17 +90,17 @@ export default class extends AbstractView {
         }
     }
 
-    updateFlashcard() {
+    updateFlashcard(view) {
         const prompt = document.querySelector("#prompt")?.value?.trim()
         const answer = document.querySelector("#answer")?.value?.trim()
-        if (!prompt || !answer || prompt == this.flashcard?.prompt || answer == this.flashcard?.answer) {
+        if (!prompt || !answer || prompt == view.flashcard?.prompt || answer == view.flashcard?.answer) {
             return
         }        
-        this.flashcard.prompt = prompt
-        this.flashcard.answer = answer
+        view.flashcard.prompt = prompt
+        view.flashcard.answer = answer
         const token = sessionStorage.getItem("token")
-        const deckId = this.params.deckId
-        const flashcardId = this.params.id
+        const deckId = view.params.deckId
+        const flashcardId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId + "/flashcards/" + flashcardId
         const request = new XMLHttpRequest()
         request.open('PUT', url)
@@ -110,14 +113,14 @@ export default class extends AbstractView {
                 alert("An error occurred while updating the flashcard")
             }
         }
-        request.send(JSON.stringify(this.flashcard))
+        request.send(JSON.stringify(view.flashcard))
     }
 
-    deleteFlashcard() {
+    deleteFlashcard(view) {
         const token = sessionStorage.getItem("token")
-        const deckId = this.params.id
-        const flashcardId = this.params.id
-        const url = window.location.origin + "/api/decks/" + deckId
+        const deckId = view.params.id
+        const flashcardId = view.params.id
+        const url = window.location.origin + "/api/decks/" + deckId + "/" + flashcardId
         const request = new XMLHttpRequest()
         request.open('DELETE', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")

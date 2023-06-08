@@ -22,10 +22,10 @@ export default class extends AbstractView {
         this.setHtml(html)
 
         document.querySelector("#generate-answer")?.addEventListener("click", this.generateAnswer)
-        document.querySelector("#create-flashcard")?.addEventListener("click", this.createFlashcard)
+        document.querySelector("#create-flashcard")?.addEventListener("click", () => this.createFlashcard(this))
     }
 
-    createFlashcard() {
+    createFlashcard(view) {
         const token = sessionStorage.getItem("token")
         if (!token) {
             alert("Please login")
@@ -48,7 +48,7 @@ export default class extends AbstractView {
             return
         }
 
-        const deckId = this.params.deckId
+        const deckId = view.params.deckId
         const url = window.location.origin + "/api/decks/" + deckId + "/flashcards"
         const request = new XMLHttpRequest()
         request.open('POST', url, false)

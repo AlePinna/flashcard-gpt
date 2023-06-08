@@ -20,6 +20,7 @@ export default class extends AbstractView {
             <button id="update-deck">Update</button>
             <button id="delete-deck">Delete</button>
             <button href="/decks/${this.params.id}/new_flashcard" data-link>New flashcard</button>
+            <button href="/decks/${this.params.id}/review" data-link>Review cards</button>
             <button id="redirect-to-decks" href="/decks" data-link>Close</button>
         `
         this.setHtml(html)
@@ -55,8 +56,11 @@ export default class extends AbstractView {
         }   
 
         if (this.deck) {
-            document.querySelector("#update-deck")?.addEventListener("click", this.updateDeck)
-            document.querySelector("#delete-deck")?.addEventListener("click", this.deleteDeck)    
+            document.querySelector("#update-deck")?.addEventListener("click", () => this.updateDeck(this))
+            document.querySelector("#delete-deck")?.addEventListener("click", () => this.deleteDeck(this))    
+        } else {
+            alert("Deck not found found")
+            document.querySelector("#redirect-to-decks")?.click()
         }
     }
 
@@ -74,14 +78,14 @@ export default class extends AbstractView {
         })   
     }
 
-    updateDeck() {
+    updateDeck(view) {
         const deckName = document.querySelector("#deck-name")?.value?.trim()
-        if (!deckName || deckName == this.deck?.name) {
+        if (!deckName || deckName == view.deck?.name) {
             return
         }
-        this.deck.name = deckName
+        view.deck.name = deckName
         const token = sessionStorage.getItem("token")
-        const deckId = this.params.id
+        const deckId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId
         const request = new XMLHttpRequest()
         request.open('PUT', url)
@@ -94,12 +98,12 @@ export default class extends AbstractView {
                 alert("An error occurred while updating the deck")
             }
         }
-        request.send(JSON.stringify(this.deck))
+        request.send(JSON.stringify(view.deck))
     }
 
-    deleteDeck() {
+    deleteDeck(view) {
         const token = sessionStorage.getItem("token")
-        const deckId = this.params.id
+        const deckId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId
         const request = new XMLHttpRequest()
         request.open('DELETE', url)
