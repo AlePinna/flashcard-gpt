@@ -43,6 +43,7 @@ export default class extends AbstractView {
             if (decks.length == 0) {
                 const row = table.insertRow(-1)
                 const noDataCell = row.insertCell(0)
+                noDataCell.setAttribute("colspan", 3)
                 noDataCell.innerText = "No decks found"
             } else {
                 decks?.forEach(deck => {

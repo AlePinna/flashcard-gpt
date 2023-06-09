@@ -66,6 +66,7 @@ export default class extends AbstractView {
         if ((this.deck?.flashcards?.length || 0) == 0) {
             const row = table.insertRow(-1)
             const noDataCell = row.insertCell(0)
+            noDataCell.setAttribute("colspan", 2)
             noDataCell.innerText = "No flashcards found"
         } else {
             this.deck.flashcards.forEach(flashcard => {
