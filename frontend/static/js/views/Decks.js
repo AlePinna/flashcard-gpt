@@ -40,15 +40,21 @@ export default class extends AbstractView {
         if (request.status == 200) { 
             const decks = JSON.parse(request.response)?.data || []
             const table = document.querySelector("#decks-table")
-            decks?.forEach(deck => {
+            if (decks.length == 0) {
                 const row = table.insertRow(-1)
-                const nameCell = row.insertCell(0)
-                nameCell.innerHTML = deck.name
-                const cardsCell = row.insertCell(1)
-                cardsCell.innerHTML = deck.flashcards?.length || 0
-                const viewCell = row.insertCell(2)
-                viewCell.innerHTML =  `<button href="/decks/${deck._id}" data-link>View</button>`                
-            })
+                const noDataCell = row.insertCell(0)
+                noDataCell.innerText = "No decks found"
+            } else {
+                decks?.forEach(deck => {
+                    const row = table.insertRow(-1)
+                    const nameCell = row.insertCell(0)
+                    nameCell.innerText = deck.name
+                    const cardsCell = row.insertCell(1)
+                    cardsCell.innerText = deck.flashcards?.length || 0
+                    const viewCell = row.insertCell(2)
+                    viewCell.innerHTML =  `<button href="/decks/${deck._id}" data-link>View</button>`                
+                })
+            }
         } else if (request.status == 401) {
             document.querySelector("#logout").click()
             alert("Session expired, please log in again")

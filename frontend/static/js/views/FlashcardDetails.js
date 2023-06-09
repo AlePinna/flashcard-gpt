@@ -18,7 +18,7 @@ export default class extends AbstractView {
             <button id="regenerate-answer">Regenerate answer</button>
             <button id="update-flashcard">Update</button><br>
             <button id="delete-flashcard">Delete</button>
-            <button href="/decks/${this.params.deckId}" data-link>Close</button>
+            <button id="redirect-to-deck" href="/decks/${this.params.deckId}" data-link>Close</button>
         `
         this.setHtml(html)
 
@@ -43,14 +43,8 @@ export default class extends AbstractView {
         
         if (request.status == 200) { 
             this.flashcard = JSON.parse(request.response)?.data
-            const prompt = document.querySelector("#prompt")
-            if (prompt) {
-                prompt.value = this.flashcard?.prompt
-            }
-            const answer = document.querySelector("#answer")
-            if (answer) {
-                answer.value = this.flashcard?.answer
-            }
+            document.querySelector("#prompt").value = this.flashcard?.prompt
+            document.querySelector("#answer").value = this.flashcard?.answer
         } else if (request.status == 401) {
             document.querySelector("#logout").click()
             alert("Session expired, please log in again")
@@ -61,7 +55,7 @@ export default class extends AbstractView {
             document.querySelector("#update-flashcard")?.addEventListener("click", () => this.updateFlashcard(this))
             document.querySelector("#delete-flashcard")?.addEventListener("click", () => this.deleteFlashcard(this))    
         } else {
-            alert("Deck not found found")
+            alert("Deck not found")
             document.querySelector("#redirect-to-deck")?.click()
         }
     }
@@ -77,23 +71,24 @@ export default class extends AbstractView {
         request.open('POST', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.setRequestHeader("Authorization", "Bearer " + token)
-        request.send(JSON.stringify({prompt: prompt}))
-        if (request.status == 200) { 
-            const answerValue = JSON.parse(request.response)?.data
-            const answer = document.querySelector("#prompt")
-            if (answerValue && answer) {
-                answer.value = answerValue
+        request.onreadystatechange = (event) => {
+            if (request.status == 200) { 
+                document.querySelector("#answer").value = JSON.parse(request.response)?.data
+                alert("Answer regenerated")
+            } else {
+                alert("An error occurred while retrieving the answer from ChatGPT")
             }
-            alert("Answer regenerated")
-        } else {
-            alert("An error occurred while retrieving the answer from ChatGPT")
         }
+        request.send(JSON.stringify({prompt: prompt}))
+        alert("Please wait while the answer is being processed")
     }
 
     updateFlashcard(view) {
         const prompt = document.querySelector("#prompt")?.value?.trim()
         const answer = document.querySelector("#answer")?.value?.trim()
-        if (!prompt || !answer || prompt == view.flashcard?.prompt || answer == view.flashcard?.answer) {
+        if (!prompt || !answer || 
+            (prompt == view.flashcard?.prompt && answer == view.flashcard?.answer)
+        ) {
             return
         }        
         view.flashcard.prompt = prompt
@@ -118,7 +113,7 @@ export default class extends AbstractView {
 
     deleteFlashcard(view) {
         const token = sessionStorage.getItem("token")
-        const deckId = view.params.id
+        const deckId = view.params.deckId
         const flashcardId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId + "/flashcards/" + flashcardId
         const request = new XMLHttpRequest()
@@ -127,7 +122,8 @@ export default class extends AbstractView {
         request.setRequestHeader("Authorization", "Bearer " + token)
         request.onreadystatechange = (event) => {
             if (request.status == 200) { 
-                alert("Deck deleted successfully")
+                alert("Flashcard deleted successfully")
+                document.querySelector("#redirect-to-deck")?.click()
             } else {
                 alert("An error occurred while deleting the flashcard")
             }

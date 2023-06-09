@@ -16,10 +16,10 @@ export default class extends AbstractView {
         `
         this.setHtml(html)
 
-        document.querySelector("#update-deck")?.addEventListener("click", this.createDeck)
+        document.querySelector("#create-deck")?.addEventListener("click", this.createDeck)
     }
 
-    getDeck() {
+    createDeck() {
         const deckName = document.querySelector("#deck-name")?.value?.trim()
         if (!deckName) {
             alert("The deck name cannot be blank")
@@ -35,14 +35,14 @@ export default class extends AbstractView {
 
         const url = window.location.origin + "/api/decks"
         const request = new XMLHttpRequest()
-        request.open('GET', url, false)
+        request.open('POST', url, false)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.setRequestHeader("Authorization", "Bearer " + token)
-        request.send()
+        request.send(JSON.stringify(newDeck))
         
-        if (request.status == 200) { 
+        if (request.status == 200) {
+            alert("Deck created successfully") 
             document.querySelector("#redirect-to-decks").click()
-            alert("Deck created successfully")
         } else if (request.status == 401) {
             document.querySelector("#logout").click()
             alert("Session expired, please log in again")

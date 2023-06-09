@@ -17,7 +17,7 @@ export default class extends AbstractView {
             <br>
             <button id="generate-answer">Generate answer</button>
             <button id="create-flashcard">Create</button><br>
-            <button id="redirect-to-deck" href="/decks/${this.params.deckId}" data-link>Cancel</button>
+            <button id="redirect-to-deck" href="/decks/${this.params.id}" data-link>Cancel</button>
         `
         this.setHtml(html)
 
@@ -48,7 +48,7 @@ export default class extends AbstractView {
             return
         }
 
-        const deckId = view.params.deckId
+        const deckId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId + "/flashcards"
         const request = new XMLHttpRequest()
         request.open('POST', url, false)
@@ -57,8 +57,8 @@ export default class extends AbstractView {
         request.send(JSON.stringify(newFlashcard))
 
         if (request.status == 200) {
-            document.querySelector("#redirect-to-deck").click()
             alert("Flashcard created successfully")
+            document.querySelector("#redirect-to-deck").click()
         } else if (request.status == 401) {
             document.querySelector("#logout").click()
             alert("Session expired, please log in again")
@@ -79,17 +79,16 @@ export default class extends AbstractView {
         request.open('POST', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.setRequestHeader("Authorization", "Bearer " + token)
-        request.send(JSON.stringify({ prompt: prompt }))
-        if (request.status == 200) {
-            const answerValue = JSON.parse(request.response)?.data
-            const answer = document.querySelector("#prompt")
-            if (answerValue && answer) {
-                answer.value = answerValue
+        request.onreadystatechange = (event) => {
+            if (request.status == 200) {
+                document.querySelector("#answer").value = JSON.parse(request.response)?.data
+                alert("Answer generated")
+            } else {
+                alert("An error occurred while retrieving the answer from ChatGPT")
             }
-            alert("Answer generated")
-        } else {
-            alert("An error occurred while retrieving the answer from ChatGPT")
         }
+        request.send(JSON.stringify({ prompt: prompt }))
+        alert("Please wait while the answer is being processed")
     }
    
 }

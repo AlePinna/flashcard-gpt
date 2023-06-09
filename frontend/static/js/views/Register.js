@@ -12,7 +12,7 @@ export default class extends AbstractView {
             Username <input id="username" type="text"/><br>
             Password <input id="password" type="password"/><br>
             Confirm password <input id="password-confirmation" type="password"/><br>
-            <button id="submit-register">Login</button>
+            <button id="submit-register">Register</button>
         `
 
         this.setHtml(html)

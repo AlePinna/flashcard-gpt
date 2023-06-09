@@ -21,7 +21,7 @@ export default class extends AbstractView {
             <br>
             <button id="previous" style="display: none;">Previous</button>
             <button id="next">Next</button>
-            <button href="/decks/${this.params.deckId}" data-link>Close</button>
+            <button href="/decks/${this.params.id}" data-link>Close</button>
         `
         this.setHtml(html)
 
@@ -65,7 +65,7 @@ export default class extends AbstractView {
             document.querySelector("#previous")?.addEventListener("click", () => this.previous(this))
             document.querySelector("#next")?.addEventListener("click", () => this.next(this))    
         } else {
-            alert("Deck not found found")
+            alert("Deck not found")
             document.querySelector("#redirect-to-deck")?.click()
         }
     }

@@ -46,36 +46,36 @@ export default class extends AbstractView {
         
         if (request.status == 200) { 
             this.deck = JSON.parse(request.response)?.data
-            const deckName = document.querySelector("#deck-name")
-            if (deckName) {
-                deckName.value = this.deck?.name
-            }
         } else if (request.status == 401) {
             document.querySelector("#logout").click()
             alert("Session expired, please log in again")
         }   
 
         if (this.deck) {
+            document.querySelector("#deck-name").value = this.deck?.name
             document.querySelector("#update-deck")?.addEventListener("click", () => this.updateDeck(this))
             document.querySelector("#delete-deck")?.addEventListener("click", () => this.deleteDeck(this))    
         } else {
-            alert("Deck not found found")
+            alert("Deck not found")
             document.querySelector("#redirect-to-decks")?.click()
         }
     }
 
     getFlashcards() {
-        if (!this.deck?.flashcards) {
-            return
-        }
         const table = document.querySelector("#flashcards-table")
-        this.deck.flashcards.forEach(flashcard => {
+        if ((this.deck?.flashcards?.length || 0) == 0) {
             const row = table.insertRow(-1)
-            const promptCell = row.insertCell(0)
-            promptCell.innerHTML = flashcard.prompt
-            const viewCell = row.insertCell(1)
-            viewCell.innerHTML =  `<button href="/decks/${this.deck._id}/flashcards/${flashcard._id}" data-link>View</button>`                
-        })   
+            const noDataCell = row.insertCell(0)
+            noDataCell.innerText = "No flashcards found"
+        } else {
+            this.deck.flashcards.forEach(flashcard => {
+                const row = table.insertRow(-1)
+                const promptCell = row.insertCell(0)
+                promptCell.innerText = flashcard.prompt
+                const viewCell = row.insertCell(1)
+                viewCell.innerHTML =  `<button href="/decks/${this.deck._id}/flashcards/${flashcard._id}" data-link>View</button>`                
+            })
+        }   
     }
 
     updateDeck(view) {
@@ -111,7 +111,8 @@ export default class extends AbstractView {
         request.setRequestHeader("Authorization", "Bearer " + token)
         request.onreadystatechange = (event) => {
             if (request.status == 200) { 
-                alert("Deck updated successfully")
+                alert("Deck deleted successfully")
+                document.querySelector("#redirect-to-decks")?.click()
             } else {
                 alert("An error occurred while deleting the deck")
             }
