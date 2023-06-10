@@ -12,7 +12,7 @@ export default class extends AbstractView {
         Prompt<br>
         <textarea id="prompt" rows="2" cols="50"></textarea>
         <br><br>
-        <button id="submit-answer">OK</button>
+        <button id="submit-answer">Generate answer</button>
         <br><br>
         Answer<br>       
         <textarea id="answer" rows="8" cols="50"></textarea>

@@ -22,3 +22,12 @@ exports.authenticateUser = async (req, res) => {
     res.status(err.status || 500).json({ error: err.message })
   }
 }
+
+exports.deleteUser = async (req, res) => {
+  try {
+    await userService.deleteUser(req.username)
+    res.json({ result: `User ${req.username} deleted successfully` })
+  } catch (err) {
+    res.status(err.status || 500).json({ error: err.message })
+  }
+}

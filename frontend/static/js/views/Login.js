@@ -27,7 +27,7 @@ export default class extends AbstractView {
             return
         }
         
-        const url = window.location.origin + "/api/login"
+        const url = window.location.origin + "/api/account/login"
         const request = new XMLHttpRequest()
         request.open('POST', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")

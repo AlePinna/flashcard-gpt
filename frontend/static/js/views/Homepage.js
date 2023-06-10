@@ -10,7 +10,11 @@ export default class extends AbstractView {
         const html = `
             <h1>Welcome to FlashcardGPT</h1>
             <p>
-                This web app will help train your mnemonic skills with user-generated flashcard, with the help of ChatGPT.
+            FlashcardGPT is a web application that simplifies flashcard creation and review.<br>
+            With FlashcardGPT, you can easily create your flashcards and review them at your convenience.<br>
+            What sets this webapp apart is the use of ChatGPT to complete the content on your flashcards.<br>
+            ChatGPT uses advanced deep learning technologies to suggest the best content possible, making your flashcards more informative and engaging.<br>
+            With FlashcardGPT, you'll be able to boost your learning experience and improve your retention of information.
             </p>
         `
         this.setHtml(html)

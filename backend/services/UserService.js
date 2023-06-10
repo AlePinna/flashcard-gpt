@@ -39,3 +39,12 @@ exports.authenticateUser = async (username, password) => {
 
   return hashedPassword === user.password
 }
+
+exports.deleteUser = async (username) => {
+
+  if (!username) {
+    throw new Error("Could not retrieve username from token")
+  }
+    
+  await UserModel.deleteOne({ username: username.trim() })
+}

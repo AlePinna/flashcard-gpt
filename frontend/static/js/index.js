@@ -8,11 +8,13 @@ import DeckDetails from "./views/DeckDetails.js";
 import CreateFlashcard from "./views/CreateFlashcard.js";
 import FlashcardDetails from "./views/FlashcardDetails.js";
 import Review from "./views/Review.js";
+import DeleteAccount from "./views/DeleteAccount.js";
 
 const routesToInitialize = [
     { path: "/", view: Homepage },
     { path: "/login", view: Login },
     { path: "/register", view: Register },
+    { path: "/delete_account", view: DeleteAccount },
     { path: "/answers", view: Answers },
     { path: "/decks", view: Decks },
     { path: "/new_deck", view: CreateDeck },

@@ -33,13 +33,13 @@ export default class extends AbstractView {
             return
         }
         
-        const url = window.location.origin + "/api/register"
+        const url = window.location.origin + "/api/account/register"
         const request = new XMLHttpRequest()
         request.open('POST', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.onreadystatechange = (event) => {
             if (request.status == 200) { 
-                document.querySelector("#home").click()
+                document.querySelector("#login").click()
                 alert("Account created successfully")
             } else {
                 alert(request.response?.error)

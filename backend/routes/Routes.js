@@ -7,9 +7,9 @@ const authInterceptor = require("../interceptors/AuthInterceptor")
  
 const router = express.Router()
 
-router.route("/login").post(userController.authenticateUser)
-
-router.route("/register").post(userController.createUser)
+router.route("/account/login").post(userController.authenticateUser)
+router.route("/account/register").post(userController.createUser)
+router.route("/account/delete").delete(authInterceptor, userController.deleteUser)
 
 router.route("/answers").post(authInterceptor, chatGPTController.getAnswerForPrompt)
 
