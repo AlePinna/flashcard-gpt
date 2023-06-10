@@ -29,8 +29,8 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend", "index.html"))
 })
 
-app.listen(3001, () => {
-  console.log("Server is running on port 3001")
+app.listen(process.env.SERVER_PORT, () => {
+  console.log("Server is running on port " + process.env.SERVER_PORT)
 })
 
 process.on("uncaughException", error => console.log(error))
