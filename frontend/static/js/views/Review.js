@@ -16,8 +16,9 @@ export default class extends AbstractView {
             Prompt<br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>
-            Answer<br>       
-            <textarea id="answer" rows="8" cols="50"></textarea>
+            Answer<br>
+            <textarea id="anti-spoiler" rows="8" cols="50">Click to reveal</textarea>       
+            <textarea id="answer" rows="8" cols="50" style="display: none;"></textarea>
             <br>
             <button id="previous" style="display: none;">Previous</button>
             <button id="next">Next</button>
@@ -52,18 +53,21 @@ export default class extends AbstractView {
         }   
 
         if (this.deck) {
-            if (!this.deck.flashcards) {
+            if (0 == (this.deck.flashcards?.length || 0)) {
                 alert("No flashcards found")
                 document.querySelector("#redirect-to-deck")?.click()
                 return
             }
             else if (this.deck.flashcards.length <= 1) {
                 document.querySelector("#next").style.display = "none" 
+            } else {
+                this.shuffleFlashcards()
             }
             this.loadFlashcard(this)
 
             document.querySelector("#previous")?.addEventListener("click", () => this.previous(this))
-            document.querySelector("#next")?.addEventListener("click", () => this.next(this))    
+            document.querySelector("#next")?.addEventListener("click", () => this.next(this))
+            document.querySelector("#anti-spoiler")?.addEventListener("click", this.revealAnswer)    
         } else {
             alert("Deck not found")
             document.querySelector("#redirect-to-deck")?.click()
@@ -71,6 +75,9 @@ export default class extends AbstractView {
     }
 
     previous(view) {
+        if (view.currentIndex <= 0) {
+            document.querySelector("#previous").style.display = "none"
+        }
         view.currentIndex--
         if (view.currentIndex == 0) {
             document.querySelector("#previous").style.display = "none"
@@ -80,6 +87,9 @@ export default class extends AbstractView {
     }
 
     next(view) {
+        if (view.currentIndex >= (view.deck.flashcards.length - 1)) {
+            return
+        }
         view.currentIndex++
         if (view.currentIndex == (view.deck.flashcards.length - 1)) {
             document.querySelector("#next").style.display = "none"
@@ -89,10 +99,21 @@ export default class extends AbstractView {
     }
 
     loadFlashcard(view) {
+        document.querySelector("#answer").style.display = "none"
+        document.querySelector("#anti-spoiler").style.display = ""
         document.querySelector("#flashcard-number").innerText = (view.currentIndex + 1) + "/" + view.deck.flashcards.length
         const currentFlashcard = view.deck.flashcards[view.currentIndex]
         document.querySelector("#prompt").value = currentFlashcard.prompt
         document.querySelector("#answer").value = currentFlashcard.answer
     }
 
+    revealAnswer() {
+        document.querySelector("#anti-spoiler").style.display = "none"
+        document.querySelector("#answer").style.display = ""
+    }
+
+    shuffleFlashcards() {
+        const shuffledFlashcards = this.deck.flashcards.sort((a, b) => 0.5 - Math.random())
+        this.deck.flashcards = shuffledFlashcards
+    }
 }
