@@ -26,7 +26,6 @@ exports.getAnswerForPrompt = async (prompt) => {
       messages: [generatePrompt(prompt)],
       temperature: 1.0,
     })
-    console.log(completion.data)
     return completion.data.choices[0].message.content
   } catch(error) {
     console.log(error?.response?.data || error.message)
