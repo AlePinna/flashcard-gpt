@@ -30,7 +30,7 @@ export default class extends AbstractView {
     }
 
     getDeck() {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         if (!token) {
             alert("Please login")
             return
@@ -85,7 +85,7 @@ export default class extends AbstractView {
             return
         }
         view.deck.name = deckName
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         const deckId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId
         const request = new XMLHttpRequest()
@@ -106,7 +106,7 @@ export default class extends AbstractView {
     }
 
     deleteDeck(view) {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         const deckId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId
         const request = new XMLHttpRequest()

@@ -10,9 +10,9 @@ export default class extends AbstractView {
     async updateView() {
         const html = `
             <h2>Review Deck</h2><br>
-            Deck <div id="deck-name"></div><br>
-            Flashcard <div id="flashcard-number"></div><br>
-
+            Deck <input disabled type="text" id="deck-name"/><br>
+            Flashcard <input disabled size="7" type="text" id="flashcard-number"/><br>
+            <br>
             Prompt<br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>
@@ -30,7 +30,7 @@ export default class extends AbstractView {
     }
 
     getDeck() {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         if (!token) {
             alert("Please login")
             return
@@ -46,7 +46,7 @@ export default class extends AbstractView {
         
         if (request.status == 200) { 
             this.deck = JSON.parse(request.response)?.data
-            document.querySelector("#deck-name").innerText = this.deck?.name
+            document.querySelector("#deck-name").value = this.deck?.name
         } else if (request.status == 401) {
             document.querySelector("#logout").click()
             alert("Session expired, please log in again")
@@ -101,7 +101,7 @@ export default class extends AbstractView {
     loadFlashcard(view) {
         document.querySelector("#answer").style.display = "none"
         document.querySelector("#anti-spoiler").style.display = ""
-        document.querySelector("#flashcard-number").innerText = (view.currentIndex + 1) + "/" + view.deck.flashcards.length
+        document.querySelector("#flashcard-number").value = (view.currentIndex + 1) + "/" + view.deck.flashcards.length
         const currentFlashcard = view.deck.flashcards[view.currentIndex]
         document.querySelector("#prompt").value = currentFlashcard.prompt
         document.querySelector("#answer").value = currentFlashcard.answer

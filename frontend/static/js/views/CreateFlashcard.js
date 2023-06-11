@@ -16,7 +16,7 @@ export default class extends AbstractView {
             <textarea id="answer" rows="8" cols="50"></textarea>
             <br>
             <button id="generate-answer">Generate answer</button>
-            <button id="create-flashcard">Create</button><br>
+            <button id="create-flashcard">Create flashcard</button><br>
             <button id="redirect-to-deck" href="/decks/${this.params.id}" data-link>Cancel</button>
         `
         this.setHtml(html)
@@ -26,7 +26,7 @@ export default class extends AbstractView {
     }
 
     createFlashcard(view) {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         if (!token) {
             alert("Please login")
             return
@@ -73,7 +73,7 @@ export default class extends AbstractView {
         if (!prompt) {
             return
         }
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         const url = window.location.origin + "/api/answers"
         const request = new XMLHttpRequest()
         request.open('POST', url)

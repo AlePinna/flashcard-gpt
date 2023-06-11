@@ -27,7 +27,7 @@ export default class extends AbstractView {
         }
         const newDeck = { name: deckName }
 
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         if (!token) {
             alert("Please login")
             return

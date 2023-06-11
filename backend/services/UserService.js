@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt")
 const UserModel = require("../models/User")
+const DeckModel = require("../models/Deck")
 
 exports.createUser = async (username, password) => {
     
@@ -46,5 +47,8 @@ exports.deleteUser = async (username) => {
     throw new Error("Could not retrieve username from token")
   }
     
-  await UserModel.deleteOne({ username: username.trim() })
+  await Promise.all([
+    UserModel.deleteOne({ username: username.trim() }),
+    DeckModel.deleteMany({ username: username.trim() })
+  ])
 }

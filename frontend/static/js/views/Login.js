@@ -37,7 +37,7 @@ export default class extends AbstractView {
             }
             if (request.status == 200) {
                 const token = JSON.parse(request.response).token
-                sessionStorage.setItem("token", token)
+                localStorage.setItem("token", token)
                 document.querySelector("#home").click()
                 alert("Login successful")
             } else if (request.status == 401) {

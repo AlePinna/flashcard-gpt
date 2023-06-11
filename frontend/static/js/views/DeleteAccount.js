@@ -21,7 +21,7 @@ export default class extends AbstractView {
     }
 
     deleteAccount() {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         if (!token) {
             alert("Please login")
             return
@@ -43,7 +43,6 @@ export default class extends AbstractView {
             if (request.status == 200) { 
                 alert("Account deleted successfully")
                 document.querySelector("#logout").click()
-                alert("Login successful")
             } else {
                 alert("An error occurred while deleting your account")
             }

@@ -23,7 +23,7 @@ export default class extends AbstractView {
     }
 
     answer() {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         if (!token) {
             alert("Please login")
             return

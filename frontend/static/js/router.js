@@ -11,17 +11,17 @@ import Review from "./views/Review.js";
 import DeleteAccount from "./views/DeleteAccount.js";
 
 const routesToInitialize = [
-    { path: "/", view: Homepage },
-    { path: "/login", view: Login },
-    { path: "/register", view: Register },
-    { path: "/delete_account", view: DeleteAccount },
-    { path: "/answers", view: Answers },
-    { path: "/decks", view: Decks },
-    { path: "/new_deck", view: CreateDeck },
-    { path: "/decks/:id", view: DeckDetails },
-    { path: "/decks/:id/new_flashcard", view: CreateFlashcard },
-    { path: "/decks/:id/review", view: Review },
-    { path: "/decks/:deckId/flashcards/:id", view: FlashcardDetails }
+    { path: "/", view: Homepage, requiresLogin: false },
+    { path: "/login", view: Login, requiresLogin: false },
+    { path: "/register", view: Register, requiresLogin: false },
+    { path: "/delete_account", view: DeleteAccount, requiresLogin: true },
+    { path: "/answers", view: Answers, requiresLogin: true },
+    { path: "/decks", view: Decks, requiresLogin: true },
+    { path: "/new_deck", view: CreateDeck, requiresLogin: true },
+    { path: "/decks/:id", view: DeckDetails, requiresLogin: true },
+    { path: "/decks/:id/new_flashcard", view: CreateFlashcard, requiresLogin: true },
+    { path: "/decks/:id/review", view: Review, requiresLogin: true },
+    { path: "/decks/:deckId/flashcards/:id", view: FlashcardDetails, requiresLogin: true }
 ]
 
 const getPathRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "([0-9a-zA-Z]+)") + "$")
@@ -64,22 +64,30 @@ const getRoute = () => {
     return null
 }
 
-const checkSession = async () => {
-    if ("token" in sessionStorage) {
+const checkSession = async (requiresLogin) => {
+    if ("token" in localStorage) {
         document.querySelector("#not-logged-in-links").style.display = "none"
         document.querySelector("#already-logged-in-links").style.display = "block"
+    } else if (requiresLogin) {
+        return false
     }
+    return true
 }
 
 const router = async() => {
-    checkSession()
-    
-    const matchingRoute = getRoute() ||  {
+
+    const fallbackRoute = {
         route: routes[0],
         params: []
     }
+    
+    let matchingRoute = getRoute() || fallbackRoute
+    
+    const finalRoute = await checkSession(matchingRoute.route.requiresLogin)
+        ? matchingRoute
+        : fallbackRoute
 
-    new matchingRoute.route.view(matchingRoute.params).updateView()
+    new finalRoute.route.view(finalRoute.params).updateView()
 }
 
 const goToRoute = url => {
@@ -101,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 document.querySelector("#logout").addEventListener("click", () => {
-    sessionStorage.removeItem("token")
+    localStorage.removeItem("token")
     document.querySelector("#not-logged-in-links").style.display = "block"
     document.querySelector("#already-logged-in-links").style.display = "none"
 })

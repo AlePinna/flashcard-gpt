@@ -26,7 +26,7 @@ export default class extends AbstractView {
     }
 
     getFlashcard() {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         if (!token) {
             alert("Please login")
             return
@@ -65,7 +65,7 @@ export default class extends AbstractView {
         if (!prompt) {
             return
         }
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         const url = window.location.origin + "/api/answers"
         const request = new XMLHttpRequest()
         request.open('POST', url)
@@ -95,7 +95,7 @@ export default class extends AbstractView {
         }        
         view.flashcard.prompt = prompt
         view.flashcard.answer = answer
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         const deckId = view.params.deckId
         const flashcardId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId + "/flashcards/" + flashcardId
@@ -117,7 +117,7 @@ export default class extends AbstractView {
     }
 
     deleteFlashcard(view) {
-        const token = sessionStorage.getItem("token")
+        const token = localStorage.getItem("token")
         const deckId = view.params.deckId
         const flashcardId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId + "/flashcards/" + flashcardId
