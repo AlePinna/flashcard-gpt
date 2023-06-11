@@ -32,7 +32,10 @@ export default class extends AbstractView {
         request.open('POST', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.onreadystatechange = (event) => {
-            if (request.status == 200) { 
+            if (request.readyState != 4) {
+                return
+            }
+            if (request.status == 200) {
                 const token = JSON.parse(request.response).token
                 sessionStorage.setItem("token", token)
                 document.querySelector("#home").click()

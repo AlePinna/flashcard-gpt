@@ -93,6 +93,9 @@ export default class extends AbstractView {
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.setRequestHeader("Authorization", "Bearer " + token)
         request.onreadystatechange = (event) => {
+            if (request.readyState != 4) {
+                return
+            }
             if (request.status == 200) { 
                 alert("Deck updated successfully")
             } else {
@@ -111,6 +114,9 @@ export default class extends AbstractView {
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.setRequestHeader("Authorization", "Bearer " + token)
         request.onreadystatechange = (event) => {
+            if (request.readyState != 4) {
+                return
+            }
             if (request.status == 200) { 
                 alert("Deck deleted successfully")
                 document.querySelector("#redirect-to-decks")?.click()

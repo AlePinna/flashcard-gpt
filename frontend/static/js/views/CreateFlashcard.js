@@ -80,9 +80,11 @@ export default class extends AbstractView {
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.setRequestHeader("Authorization", "Bearer " + token)
         request.onreadystatechange = (event) => {
+            if (request.readyState != 4) {
+                return
+            }
             if (request.status == 200) {
                 document.querySelector("#answer").value = JSON.parse(request.response)?.data
-                alert("Answer generated")
             } else {
                 alert("An error occurred while retrieving the answer from ChatGPT")
             }

@@ -38,6 +38,9 @@ export default class extends AbstractView {
         request.open('POST', url)
         request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
         request.onreadystatechange = (event) => {
+            if (request.readyState != 4) {
+                return
+            }
             if (request.status == 200) { 
                 document.querySelector("#login").click()
                 alert("Account created successfully")
