@@ -7,21 +7,23 @@
     <link rel="stylesheet" href="/static/css/index.css">
 </head>
 <body>
-    <nav class="nav">
-        <h2>FlashcardGPT</h2>
-        <a href="/" class="nav__link" data-link id="home">Home</a>
-        <div id="not-logged-in-links">
-            <a href="/login" class="nav__link" data-link id="login">Login</a>
-            <a href="/register" class="nav__link" data-link id="register">Register</a>
-        </div>
-        <div id="already-logged-in-links">
-            <a href="/decks" class="nav__link" data-link id="decks">Decks</a>
-            <a href="/answers" class="nav__link" data-link id="answers">Answers</a>
-            <a href="/" class="nav__link" id="logout">Log out</a>
-            <a href="/delete_account" class="nav__link" data-link id="delete-account">Delete account</a>
-        </div>
-    </nav>
-    <div id="app"></div>
+    <div id="container">
+        <nav class="nav">
+            <h2>FlashcardGPT</h2>
+            <a href="/" class="nav__link" data-link id="home">Home</a>
+            <div id="not-logged-in-links">
+                <a href="/login" class="nav__link" data-link id="login">Login</a>
+                <a href="/register" class="nav__link" data-link id="register">Register</a>
+            </div>
+            <div id="already-logged-in-links">
+                <a href="/decks" class="nav__link" data-link id="decks">Decks</a>
+                <a href="/answers" class="nav__link" data-link id="answers">Answers</a>
+                <a href="/" class="nav__link" id="logout">Log out</a>
+                <a href="/delete_account" class="nav__link" data-link id="delete-account">Delete account</a>
+            </div>
+        </nav>
+        <div id="app"></div>
+    </div>
     <script type="module" src="/static/js/index.js"></script>
 </body>
 </html>
