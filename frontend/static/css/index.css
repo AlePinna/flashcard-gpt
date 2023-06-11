@@ -1,5 +1,3 @@
-#container { display:block; }
-
 @media (pointer: fine), (pointer: none) {
 	/* desktop */
     html {
@@ -10,21 +8,10 @@
 @media only screen and (orientation:portrait) and (pointer: coarse) {
     /* mobile device */
 
-  #container {
-
-   height: 100vw;
-
-   -webkit-transform: rotate(90deg);
-
-   -moz-transform: rotate(90deg);
-
-   -o-transform: rotate(90deg);
-
-   -ms-transform: rotate(90deg);
-
-   transform: rotate(90deg);
-
-  }
+    body {
+        height: 100vw;
+        transform: rotate(90deg);
+      }
 
 }
 
