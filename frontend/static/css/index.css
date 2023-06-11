@@ -5,16 +5,6 @@
     }
 }
 
-@media only screen and (orientation:portrait) and (pointer: coarse) {
-    /* mobile device */
-
-    body {
-        height: 100vw;
-        transform: rotate(90deg);
-      }
-
-}
-
 body {
     --nav-width: 200px;
     margin: 0 0 0 var(--nav-width);
