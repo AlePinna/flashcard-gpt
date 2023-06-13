@@ -8,7 +8,7 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Deck details</h2><br>
+            <h2>Deck details</h2>
             <b>Deck name</b>
             <br>
             <input type="text" id="deck-name">
@@ -25,7 +25,7 @@ export default class extends AbstractView {
             </table>
             
             <button href="/decks/${this.params.id}/new_flashcard" data-link>New flashcard</button>
-            <button href="/decks/${this.params.id}/review" data-link>Review cards</button>
+            <button id="review" href="/decks/${this.params.id}/review" data-link style="display: none">Review cards</button>
         `
         this.setHtml(html)
 
@@ -80,6 +80,7 @@ export default class extends AbstractView {
                 const viewCell = row.insertCell(1)
                 viewCell.innerHTML =  `<button href="/decks/${this.deck._id}/flashcards/${flashcard._id}" data-link>View</button>`                
             })
+            document.querySelector("#review").style.display = ""
         }   
     }
 
@@ -110,6 +111,9 @@ export default class extends AbstractView {
     }
 
     deleteDeck(view) {
+        if (!confirm("Do you want to delete this deck?")) {
+            return
+        }
         const token = localStorage.getItem("token")
         const deckId = view.params.id
         const url = window.location.origin + "/api/decks/" + deckId

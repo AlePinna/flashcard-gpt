@@ -3,12 +3,12 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params)
-        this.setTitle("Delete Account")
+        this.setTitle("Delete account")
     }
 
     async updateView() {
         const html = `
-            <h2>Delete account</h2><br>
+            <h2>Delete account</h2>
             Press <b>Delete</b> to delete your account permanently<br><br>
             This operation cannot be undone<br><br>
             <button id="submit-delete">Delete</button>
@@ -27,7 +27,7 @@ export default class extends AbstractView {
             return
         }
         
-        if (!confirm("Are you sure you want to delete your account?")) {
+        if (!confirm("Do you want to proceed with the deletion of your account?")) {
             return
         }
         

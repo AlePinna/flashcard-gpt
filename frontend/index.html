@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlashcardGPT</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto" />
     <link rel="stylesheet" href="/static/css/index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/static/favicon/favicon.ico">
 </head>
 <body>
     <nav class="nav">
@@ -17,9 +17,9 @@
             <a href="/register" class="nav__link" data-link id="register">Register</a>
         </div>
         <div id="already-logged-in-links">
-            <a href="/decks" class="nav__link" data-link id="decks">Decks</a>
-            <a href="/answers" class="nav__link" data-link id="answers">Answers</a>
-            <a href="/" class="nav__link" id="logout">Log out</a>
+            <a href="/decks" class="nav__link" data-link id="decks">My decks</a>
+            <a href="/answers" class="nav__link" data-link id="answers">Ask ChatGPT</a>
+            <a href data-link class="nav__link" id="logout">Log out</a>
             <a href="/delete_account" class="nav__link" data-link id="delete-account">Delete account</a>
         </div>
     </nav>

@@ -8,8 +8,8 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>New deck</h2><br>
-            Deck name<br>
+            <h2>New deck</h2>
+            <b>Deck name</b><br>
             <input type="text" id="deck-name"><br><br>
 
             <button id="create-deck">Create</button>

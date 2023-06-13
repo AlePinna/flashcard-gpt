@@ -3,13 +3,13 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params)
-        this.setTitle("Decks")
+        this.setTitle("My decks")
     }
 
     async updateView() {
         const html = `
-            <h2>Decks</h2><br>
-            Decks are collections of user-generated flashcards<br><br>
+            <h2>My decks</h2>
+            Decks are collections of user-generated flashcards<br>
             <table id="decks-table" class="styled-table">
                 <tr>
                     <th>Name</th>

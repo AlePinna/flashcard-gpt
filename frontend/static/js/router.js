@@ -101,7 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
         if (e.target.matches("[data-link]")) {
             e.preventDefault()
-            goToRoute(e.target.getAttribute("href"))
+            if (!e.target.matches("#logout")) {
+                goToRoute(e.target.getAttribute("href"))
+            }
         }
     })
 
@@ -109,7 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 document.querySelector("#logout").addEventListener("click", () => {
+    if (!confirm("Do you want to log out?")) {
+        return
+    }
     localStorage.removeItem("token")
     document.querySelector("#not-logged-in-links").style.display = "block"
     document.querySelector("#already-logged-in-links").style.display = "none"
+    goToRoute("/")
 })

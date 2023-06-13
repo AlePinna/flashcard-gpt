@@ -8,7 +8,7 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Create a new account</h2><br>
+            <h2>Create a new account</h2>
             <b>Username</b>
             <br>
             <input id="username" type="text" placeholder="at least 4 characters" /><br><br>

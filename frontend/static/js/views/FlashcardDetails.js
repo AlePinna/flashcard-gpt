@@ -8,7 +8,7 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Flashcard details</h2><br>
+            <h2>Flashcard details</h2>
             <b>Prompt</b><br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>
@@ -118,6 +118,9 @@ export default class extends AbstractView {
     }
 
     deleteFlashcard(view) {
+        if (!confirm("Do you want to delete this flashcard?")) {
+            return
+        }
         const token = localStorage.getItem("token")
         const deckId = view.params.deckId
         const flashcardId = view.params.id
