@@ -3,13 +3,14 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params)
-        this.setTitle("New Deck")
+        this.setTitle("New deck")
     }
 
     async updateView() {
         const html = `
-            <h2>New Deck</h2>
-            Name <input type="text" id="deck-name">
+            <h2>New deck</h2><br>
+            Deck name<br>
+            <input type="text" id="deck-name"><br><br>
 
             <button id="create-deck">Create</button>
             <button id="redirect-to-decks" href="/decks" data-link>Cancel</button>

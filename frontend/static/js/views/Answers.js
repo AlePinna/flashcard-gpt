@@ -3,21 +3,21 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params)
-        this.setTitle("Answers")
+        this.setTitle("Ask GPT")
     }
 
     async updateView() {
         const html = `
-        <h2>ChatGPT</h2>
+        <h2>Ask ChatGPT</h2><br>
         In this page you can query ChapGPT without having to create new flashcards
         <br><br>
-        Prompt<br>
+        <b>Prompt</b><br>
         <textarea id="prompt" rows="2" cols="50"></textarea>
         <br><br>
         <button id="submit-answer">Generate answer</button>
         <br><br>
-        Answer<br>       
-        <textarea id="answer" rows="8" cols="50"></textarea>
+        <b>Answer</b><br>       
+        <textarea disabled id="answer" rows="8" cols="50"></textarea>
     `
         this.setHtml(html)
 

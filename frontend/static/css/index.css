@@ -9,7 +9,21 @@ body {
     --nav-width: 200px;
     margin: 0 0 0 var(--nav-width);
     font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
+    font-size: 18px;    
+    text-align: left;
+}
+
+table, input {
+    text-align: center;
+} 
+
+h1, :not(.nav) > h2 {
+    color: #4c942ab9;
+    font-weight: bold;
+}
+
+.nav > h2 {
+    color: #4c942ab9;
 }
 
 .nav {
@@ -19,10 +33,6 @@ body {
     width: var(--nav-width);
     height: 100%;
     background: #222222;
-}
-
-.nav > h2 {
-    color: #48663a;
 }
 
 .nav__link {

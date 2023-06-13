@@ -8,16 +8,19 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>New Flashcard</h2>
-            Use the button "Generate answer" to ask ChatGPT (NB: the same prompt can generate different answers if repeated)<br><br>
+            <h2>New flashcard</h2><br>
+            Use the button <b>Generate answer</b> to ask ChatGP<br> 
+            NB: the same prompt can generate different answers if repeated, 
+            and they can be edited manually before saving<br><br>
             Prompt<br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>
+            <button id="generate-answer">Generate answer</button>
+            <br><br>
             Answer<br>       
             <textarea id="answer" rows="8" cols="50"></textarea>
-            <br>
-            <button id="generate-answer">Generate answer</button>
-            <button id="create-flashcard">Create flashcard</button><br>
+            <br><br>
+            <button id="create-flashcard">Create flashcard</button>
             <button id="redirect-to-deck" href="/decks/${this.params.id}" data-link>Cancel</button>
         `
         this.setHtml(html)

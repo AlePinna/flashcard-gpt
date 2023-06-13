@@ -8,10 +8,14 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Create a new account</h2>
-            Username (at least 4 characters) <br><input id="username" type="text"/><br>
-            Password (at least 8 characters) <br><input id="password" type="password"/><br>
-            Confirm password <br><input id="password-confirmation" type="password"/><br>
+            <h2>Create a new account</h2><br>
+            <b>Username</b>
+            <br>
+            <input id="username" type="text" placeholder="at least 4 characters" /><br><br>
+            <b>Password</b>
+            <br><input id="password" type="password" placeholder="at least 8 characters" /><br><br>
+            <b>Confirm password</b>
+            <br><input id="password-confirmation" type="password"/><br><br>
             <button id="submit-register">Register</button>
         `
 

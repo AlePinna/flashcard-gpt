@@ -3,13 +3,19 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params)
-        this.setTitle("Decks Details")
+        this.setTitle("Decks details")
     }
 
     async updateView() {
         const html = `
-            <h2>Deck Details</h2>
-            Name <input type="text" id="deck-name">
+            <h2>Deck details</h2><br>
+            <b>Deck name</b>
+            <br>
+            <input type="text" id="deck-name">
+            <br><br>
+            <button id="update-deck">Update</button>
+            <button id="delete-deck">Delete</button>
+            <button id="redirect-to-decks" href="/decks" data-link>Close</button>
 
             <table id="flashcards-table" class="styled-table">
                 <tr>
@@ -17,11 +23,9 @@ export default class extends AbstractView {
                     <th>Details</th>
                 </tr>
             </table>
-            <button id="update-deck">Update</button>
-            <button id="delete-deck">Delete</button>
+            
             <button href="/decks/${this.params.id}/new_flashcard" data-link>New flashcard</button>
             <button href="/decks/${this.params.id}/review" data-link>Review cards</button>
-            <button id="redirect-to-decks" href="/decks" data-link>Close</button>
         `
         this.setHtml(html)
 

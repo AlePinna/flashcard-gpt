@@ -3,20 +3,21 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params)
-        this.setTitle("Flashcard Details")
+        this.setTitle("Flashcard details")
     }
 
     async updateView() {
         const html = `
-            <h2>Flashcard Details</h2>
-            Prompt<br>
+            <h2>Flashcard details</h2><br>
+            <b>Prompt</b><br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>
-            Answer<br>       
-            <textarea id="answer" rows="8" cols="50"></textarea>
-            <br>
             <button id="regenerate-answer">Regenerate answer</button>
-            <button id="update-flashcard">Update</button><br>
+            <br><br>
+            <b>Answer</b><br>       
+            <textarea id="answer" rows="8" cols="50"></textarea>
+            <br><br>
+            <button id="update-flashcard">Update</button>
             <button id="delete-flashcard">Delete</button>
             <button id="redirect-to-deck" href="/decks/${this.params.deckId}" data-link>Close</button>
         `

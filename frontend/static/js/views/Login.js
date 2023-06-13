@@ -8,9 +8,11 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Login to your account</h2>
-            Username <input id="username" type="text"/><br>
-            Password <input id="password" type="password"/><br>
+            <h2>Log into your account</h2><br>
+            <b>Username</b><br>
+            <input id="username" type="text"/><br><br>
+            <b>Password</b><br>
+            <input id="password" type="password"/><br><br>
             <button id="submit-login">Login</button>
          `
 

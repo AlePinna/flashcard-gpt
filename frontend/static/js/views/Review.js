@@ -3,23 +3,23 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor(params) {
         super(params)
-        this.setTitle("Review Deck")
+        this.setTitle("Review deck")
         this.currentIndex = 0
     }
 
     async updateView() {
         const html = `
-            <h2>Review Deck</h2>
-            Deck <input disabled type="text" id="deck-name"/><br>
-            Flashcard <input disabled size="7" type="text" id="flashcard-number"/><br>
+            <h2>Review deck</h2><br>
+            <b>Deck name</b> <input disabled type="text" id="deck-name"/><br>
+            <b>Flashcard n.</b> <input disabled size="7" type="text" id="flashcard-number"/><br>
             <br>
-            Prompt<br>
+            <b>Prompt</b><br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>
-            Answer<br>
+            <b>Answer</b><br>
             <textarea id="anti-spoiler" rows="8" cols="50">Click to reveal</textarea>       
             <textarea id="answer" rows="8" cols="50" style="display: none;"></textarea>
-            <br>
+            <br><br>
             <button id="previous" style="display: none;">Previous</button>
             <button id="next">Next</button>
             <button href="/decks/${this.params.id}" data-link>Close</button>

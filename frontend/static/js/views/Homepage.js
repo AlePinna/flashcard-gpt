@@ -8,7 +8,7 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h1>Welcome to FlashcardGPT</h1>
+            <h1>Welcome to FlashcardGPT</h1><br>
             <p>
             FlashcardGPT is a web application that simplifies flashcard creation and review.<br>
             With FlashcardGPT, you can easily create your flashcards and review them at your convenience.<br>
