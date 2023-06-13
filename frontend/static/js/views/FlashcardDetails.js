@@ -8,7 +8,7 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Flashcard Details</h2><br>
+            <h2>Flashcard Details</h2>
             Prompt<br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>

@@ -8,7 +8,8 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>New Flashcard</h2><br>
+            <h2>New Flashcard</h2>
+            Use the button "Generate answer" to ask ChatGPT (NB: the same prompt can generate different answers if repeated)<br><br>
             Prompt<br>
             <textarea id="prompt" rows="2" cols="50"></textarea>
             <br><br>

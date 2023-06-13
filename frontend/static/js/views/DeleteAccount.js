@@ -8,8 +8,8 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Delete account</h2><br>
-            Click <b>Delete</b> to permanently delete your account<br>
+            <h2>Delete account</h2>
+            Click <b>Delete</b> to permanently delete your account<br><br>
             This operation cannot be undone<br><br>
             <button id="submit-delete">Delete</button>
             <button href="/home" data-link>Cancel</button>

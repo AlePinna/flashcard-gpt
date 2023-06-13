@@ -6,14 +6,12 @@ const configuration = new openaiModule.Configuration({
 })
 const openai = new openaiModule.OpenAIApi(configuration)
 
+if (!configuration.apiKey) {
+  throw new Error("OpenAI API key not configured, please follow instructions in README.md")
+}
+
 exports.getAnswerForPrompt = async (prompt) => {
     
-  if (!configuration.apiKey) {
-    const err = new Error("OpenAI API key not configured, please follow instructions in README.md")
-    err.status = 400
-    throw err
-  }
-
   if (!prompt || prompt.trim().length === 0) {
     const err = new Error("Please enter a valid prompt")
     err.status = 400

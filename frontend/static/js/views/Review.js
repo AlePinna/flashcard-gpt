@@ -9,7 +9,7 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Review Deck</h2><br>
+            <h2>Review Deck</h2>
             Deck <input disabled type="text" id="deck-name"/><br>
             Flashcard <input disabled size="7" type="text" id="flashcard-number"/><br>
             <br>
@@ -53,7 +53,7 @@ export default class extends AbstractView {
         }   
 
         if (this.deck) {
-            if (0 == (this.deck.flashcards?.length || 0)) {
+            if ((this.deck.flashcards?.length || 0) == 0) {
                 alert("No flashcards found")
                 document.querySelector("#redirect-to-deck")?.click()
                 return

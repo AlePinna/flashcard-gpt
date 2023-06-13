@@ -3,17 +3,17 @@ const UserModel = require("../models/User")
 const DeckModel = require("../models/Deck")
 
 exports.createUser = async (username, password) => {
-    
-  if (!username || !password || username.trim().length < 8 || password.trim().length < 8) {
-    const err = new Error("Username and password should contain at least 8 characters")
-    err.status = 400
-    throw err
+
+  if ((username?.trim()?.length || 0) < 4) {
+    throwBadRequest("Username should contain at least 4 characters")
+  }
+
+  if ((password?.trim()?.length || 0) < 8) {
+    throwBadRequest("Password should contain at least 8 characters")
   }
 
   if (await UserModel.exists({ username: username.trim() })) {
-    const err = new Error("This username is already taken")
-    err.status = 400
-    throw err
+    throwBadRequest("This username is already taken")
   }
 
   const hashedPassword = await bcrypt.hash(password.trim(), await bcrypt.genSalt(10))
@@ -23,10 +23,8 @@ exports.createUser = async (username, password) => {
 
 exports.authenticateUser = async (username, password) => {
     
-  if (!username || !password) {
-    const err = new Error("Username and password cannot be blank")
-    err.status = 400
-    throw err
+  if (!username?.trim() || !password?.trim()) {
+    throwBadRequest("Username and password cannot be blank")
   }
 
   const user = await UserModel.findOne({ username: username.trim() })
@@ -51,4 +49,10 @@ exports.deleteUser = async (username) => {
     UserModel.deleteOne({ username: username.trim() }),
     DeckModel.deleteMany({ username: username.trim() })
   ])
+}
+
+function throwBadRequest(message) {
+  const err = new Error(message)
+  err.status = 400
+  throw err
 }

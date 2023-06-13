@@ -8,7 +8,8 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Decks</h2><br>
+            <h2>Decks</h2>
+            Decks are collections of user-generated flashcards<br><br>
             <table id="decks-table" class="styled-table">
                 <tr>
                     <th>Name</th>

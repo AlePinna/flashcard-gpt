@@ -8,10 +8,10 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Create a new account</h2><br>
-            Username <input id="username" type="text"/><br>
-            Password <input id="password" type="password"/><br>
-            Confirm password <input id="password-confirmation" type="password"/><br>
+            <h2>Create a new account</h2>
+            Username (at least 4 characters) <br><input id="username" type="text"/><br>
+            Password (at least 8 characters) <br><input id="password" type="password"/><br>
+            Confirm password <br><input id="password-confirmation" type="password"/><br>
             <button id="submit-register">Register</button>
         `
 
@@ -45,7 +45,7 @@ export default class extends AbstractView {
                 document.querySelector("#login").click()
                 alert("Account created successfully")
             } else {
-                alert(request.response?.error)
+                alert(JSON.parse(request.response)?.error)
             }
         }
         request.send(JSON.stringify({ username: username, password: password }))

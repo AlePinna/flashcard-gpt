@@ -8,7 +8,9 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-        <h2>ChatGPT</h2><br>
+        <h2>ChatGPT</h2>
+        In this page you can query ChapGPT without having to create new flashcards
+        <br><br>
         Prompt<br>
         <textarea id="prompt" rows="2" cols="50"></textarea>
         <br><br>

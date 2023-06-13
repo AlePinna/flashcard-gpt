@@ -8,7 +8,7 @@ export default class extends AbstractView {
 
     async updateView() {
         const html = `
-            <h2>Deck Details</h2><br>
+            <h2>Deck Details</h2>
             Name <input type="text" id="deck-name">
 
             <table id="flashcards-table" class="styled-table">
