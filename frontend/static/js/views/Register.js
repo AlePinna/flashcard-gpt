@@ -22,6 +22,12 @@ export default class extends AbstractView {
         this.setHtml(html)
 
         document.querySelector("#submit-register").addEventListener("click", this.register)
+        document.querySelector("#password-confirmation").addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+              event.preventDefault()
+              this.register()
+            }
+        })
     }
 
     register() {
